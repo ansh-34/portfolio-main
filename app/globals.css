@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Clean & Modern 2-3 Color Design System */
+
+@layer base {
+  :root {
+    --background: 222 47% 98%; /* Crisp light slate background #f8fafc */
+    --foreground: 222 47% 11%; /* Dark slate text #0f172a */
+
+    --card: 0 0% 100%; /* Pure white cards #ffffff */
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 158 64% 42%; /* Vibrant Emerald #059669 */ /* Refined Royal Blue #2563eb */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 215 16% 47%; /* Cool muted slate #64748b */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 210 40% 961%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 158 64% 42%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 158 64% 42%;
+
+    --radius: 1rem;
+
+    /* Single cohesive accent gradient */
+    --gradient-primary: linear-gradient(135deg, #059669, #10b981);
+    --gradient-secondary: linear-gradient(135deg, #1e293b, #334155);
+    --glow-primary: 0 0 25px rgba(16, 185, 129, 0.2);
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(226, 232, 240, 0.8);
+  }
+
+  .light {
+    --background: 222 47% 98%; /* Clean light slate #f8fafc */
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 158 64% 42%; /* Vibrant Emerald #059669 */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 215 16% 47%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 158 64% 42%;
+    --accent-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 158 64% 42%;
+  }
+
+  .dark {
+    --background: 222 47% 7%; /* Deep slate midnight #090d16 */
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 11%; /* Clean slate card #0f172a */
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 158 64% 52%; /* Bright Emerald for dark mode #10b981 */ /* Soft bright blue for dark mode #3b82f6 */
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 215 16% 47%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 158 64% 52%;
+    --accent-foreground: 222 47% 11%;
+
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 158 64% 52%;
+
+    --glass-bg: rgba(15, 23, 42, 0.75);
+    --glass-border: rgba(51, 65, 85, 0.5);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  /* Glassmorphic card styles */
+  .glass-card {
+    @apply relative overflow-hidden rounded-2xl;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .dark .glass-card {
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .light .glass-card {
+    box-shadow: 0 4px 20px 0 rgba(15, 23, 42, 0.05);
+  }
+
+  /* Tag styles */
+  .project-tag {
+    @apply px-3 py-1 text-xs font-medium rounded-md transition-all duration-200;
+    background: rgba(16, 185, 129, 0.08);
+    color: #059669;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+
+  .dark .project-tag {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+  }
+
+  /* Link styles */
+  .project-link {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200;
+    background: hsl(var(--card));
+    color: hsl(var(--foreground));
+    border: 1px solid hsl(var(--border));
+  }
+
+  .project-link:hover {
+    border-color: hsl(var(--primary));
+    color: hsl(var(--primary));
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
