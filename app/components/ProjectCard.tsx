@@ -22,7 +22,7 @@ interface ProjectCardProps {
 }
 
 const accentFromGradient: Record<string, string> = {
-  "from-emerald-500 to-teal-500": "#0e7490",
+  "from-blue-600 to-indigo-600": "#2563eb",
   "from-purple-500 to-pink-500": "#7e22ce",
   "from-orange-500 to-red-500": "#c2410c",
   "from-emerald-500 to-teal-500": "#047857",
