@@ -5,25 +5,73 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Github, Linkedin, Mail, Phone, ChevronDown, Check, Copy, MessageSquare, ExternalLink, X } from "lucide-react";
 
 const Hero = () => {
-  const [phoneMenuOpen, setPhoneMenuOpen] = useState(false);
-  const [phoneCopied, setPhoneCopied] = useState(false);
-  const phoneMenuRef = useRef<HTMLDivElement>(null);
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const socialContainerRef = useRef<HTMLDivElement>(null);
 
-  const handleCopyPhone = () => {
-    navigator.clipboard.writeText('+91 9079231064');
-    setPhoneCopied(true);
-    setTimeout(() => setPhoneCopied(false), 2000);
+  const handleCopy = (id: string, text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
   };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (phoneMenuRef.current && !phoneMenuRef.current.contains(event.target as Node)) {
-        setPhoneMenuOpen(false);
+      if (socialContainerRef.current && !socialContainerRef.current.contains(event.target as Node)) {
+        setActiveMenu(null);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const socialItems = [
+    {
+      id: "github",
+      icon: Github,
+      label: "GitHub",
+      displayValue: "github.com/ansh-34",
+      directUrl: "https://github.com/ansh-34",
+      directLabel: "Go to GitHub",
+      copyValue: "https://github.com/ansh-34",
+      copyLabel: "Copy GitHub Link",
+      isPhone: false,
+    },
+    {
+      id: "linkedin",
+      icon: Linkedin,
+      label: "LinkedIn",
+      displayValue: "linkedin.com/in/ansh-gupta-iiitr",
+      directUrl: "https://www.linkedin.com/in/ansh-gupta-iiitr",
+      directLabel: "Go to LinkedIn",
+      copyValue: "https://www.linkedin.com/in/ansh-gupta-iiitr",
+      copyLabel: "Copy LinkedIn Link",
+      isPhone: false,
+    },
+    {
+      id: "mail",
+      icon: Mail,
+      label: "Gmail",
+      displayValue: "anshg5384@gmail.com",
+      directUrl: "https://mail.google.com/mail/?view=cm&fs=1&to=anshg5384@gmail.com",
+      directLabel: "Open in Gmail",
+      copyValue: "anshg5384@gmail.com",
+      copyLabel: "Copy Email Address",
+      isPhone: false,
+    },
+    {
+      id: "phone",
+      icon: Phone,
+      label: "Phone",
+      displayValue: "+91 9079231064",
+      directUrl: "tel:+919079231064",
+      directLabel: "Call Directly",
+      copyValue: "+91 9079231064",
+      copyLabel: "Copy Phone Number",
+      isPhone: true,
+      whatsappUrl: "https://wa.me/919079231064?text=Hi%20Ansh,%20I%20saw%20your%20portfolio!",
+    },
+  ];
   return (
     <section id="hero" className="min-h-screen flex items-center pt-24 relative overflow-hidden px-4">
       {/* Background */}
@@ -92,123 +140,112 @@ const Hero = () => {
             </motion.div>
 
             <motion.div
+              ref={socialContainerRef}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
               className="mt-10 flex items-center gap-4 relative"
             >
-              {[
-                { icon: Github, href: "https://github.com/ansh-34", label: "GitHub Profile", target: "_blank" },
-                { icon: Linkedin, href: "https://www.linkedin.com/in/ansh-gupta-iiitr", label: "LinkedIn Profile", target: "_blank" },
-                { 
-                  icon: Mail, 
-                  href: "https://mail.google.com/mail/?view=cm&fs=1&to=anshg5384@gmail.com", 
-                  label: "Send via Gmail",
-                  target: "_blank"
-                },
-              ].map((social, index) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  target={social.target}
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  whileHover={{ scale: 1.15, y: -4 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-                  className="w-11 h-11 glass-card rounded-full flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300"
-                >
-                  <social.icon size={20} />
-                </motion.a>
-              ))}
+              {socialItems.map((item) => {
+                const Icon = item.icon;
+                const isOpen = activeMenu === item.id;
+                const isCopied = copiedId === item.id;
 
-              {/* Phone Action Button with Interactive Popover */}
-              <div className="relative" ref={phoneMenuRef}>
-                <motion.button
-                  type="button"
-                  onClick={() => setPhoneMenuOpen(!phoneMenuOpen)}
-                  whileHover={{ scale: 1.15, y: -4 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label="Contact options"
-                  className={`w-11 h-11 glass-card rounded-full flex items-center justify-center transition-all duration-300 ${
-                    phoneMenuOpen
-                      ? "text-primary border-primary bg-primary/10 ring-2 ring-primary/30"
-                      : "text-muted-foreground hover:text-primary hover:border-primary/50"
-                  }`}
-                >
-                  <Phone size={20} />
-                </motion.button>
-
-                {/* Popover Action Menu */}
-                <AnimatePresence>
-                  {phoneMenuOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute left-0 sm:left-auto -top-44 sm:-top-44 z-50 w-64 p-3 rounded-2xl glass-card border border-primary/20 shadow-2xl bg-card/95 backdrop-blur-xl"
+                return (
+                  <div key={item.id} className="relative">
+                    <motion.button
+                      type="button"
+                      onClick={() => setActiveMenu(isOpen ? null : item.id)}
+                      whileHover={{ scale: 1.15, y: -4 }}
+                      whileTap={{ scale: 0.95 }}
+                      aria-label={`${item.label} options`}
+                      className={`w-11 h-11 glass-card rounded-full flex items-center justify-center transition-all duration-300 ${
+                        isOpen
+                          ? "text-primary border-primary bg-primary/10 ring-2 ring-primary/30"
+                          : "text-muted-foreground hover:text-primary hover:border-primary/50"
+                      }`}
                     >
-                      <div className="flex items-center justify-between pb-2 mb-2 border-b border-border/50">
-                        <div className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
-                          <Phone size={13} className="text-primary" />
-                          <span>+91 9079231064</span>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => setPhoneMenuOpen(false)}
-                          className="text-muted-foreground hover:text-foreground p-0.5"
-                        >
-                          <X size={14} />
-                        </button>
-                      </div>
+                      <Icon size={20} />
+                    </motion.button>
 
-                      <div className="space-y-1.5">
-                        {/* Call Directly */}
-                        <a
-                          href="tel:+919079231064"
-                          className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-xl text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+                    {/* Popover Action Menu */}
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                          transition={{ duration: 0.18 }}
+                          className="absolute left-0 sm:-left-6 bottom-14 z-50 w-64 p-3 rounded-2xl glass-card border border-primary/20 shadow-2xl bg-card/95 backdrop-blur-xl"
                         >
-                          <Phone size={14} className="text-emerald-500" />
-                          <span>Call Directly (+91 9079231064)</span>
-                        </a>
-
-                        {/* WhatsApp */}
-                        <a
-                          href="https://wa.me/919079231064?text=Hi%20Ansh,%20I%20saw%20your%20portfolio!"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-xl text-foreground hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
-                        >
-                          <MessageSquare size={14} className="text-emerald-500" />
-                          <span>Chat on WhatsApp</span>
-                        </a>
-
-                        {/* Copy Phone */}
-                        <button
-                          type="button"
-                          onClick={handleCopyPhone}
-                          className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium rounded-xl text-foreground hover:bg-primary/10 hover:text-primary transition-colors text-left"
-                        >
-                          <div className="flex items-center gap-2.5">
-                            {phoneCopied ? (
-                              <Check size={14} className="text-emerald-500" />
-                            ) : (
-                              <Copy size={14} className="text-primary" />
-                            )}
-                            <span>{phoneCopied ? "Copied to Clipboard!" : "Copy Phone Number"}</span>
+                          {/* Header */}
+                          <div className="flex items-center justify-between pb-2 mb-2 border-b border-border/50">
+                            <div className="flex items-center gap-1.5 text-xs font-semibold text-foreground truncate max-w-[180px]">
+                              <Icon size={14} className="text-primary shrink-0" />
+                              <span className="truncate">{item.displayValue}</span>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => setActiveMenu(null)}
+                              className="text-muted-foreground hover:text-foreground p-0.5 rounded transition-colors"
+                            >
+                              <X size={14} />
+                            </button>
                           </div>
-                          {phoneCopied && (
-                            <span className="text-[10px] text-emerald-500 font-semibold">Done</span>
-                          )}
-                        </button>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+
+                          {/* Action Options */}
+                          <div className="space-y-1.5">
+                            {/* Direct Link / Action */}
+                            <a
+                              href={item.directUrl}
+                              target={item.isPhone ? undefined : "_blank"}
+                              rel="noopener noreferrer"
+                              onClick={() => setActiveMenu(null)}
+                              className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-xl text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+                            >
+                              <ExternalLink size={14} className="text-primary shrink-0" />
+                              <span>{item.directLabel}</span>
+                            </a>
+
+                            {/* WhatsApp (only for phone) */}
+                            {item.whatsappUrl && (
+                              <a
+                                href={item.whatsappUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => setActiveMenu(null)}
+                                className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-xl text-foreground hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
+                              >
+                                <MessageSquare size={14} className="text-emerald-500 shrink-0" />
+                                <span>Chat on WhatsApp</span>
+                              </a>
+                            )}
+
+                            {/* Copy Action */}
+                            <button
+                              type="button"
+                              onClick={() => handleCopy(item.id, item.copyValue)}
+                              className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium rounded-xl text-foreground hover:bg-primary/10 hover:text-primary transition-colors text-left"
+                            >
+                              <div className="flex items-center gap-2.5">
+                                {isCopied ? (
+                                  <Check size={14} className="text-emerald-500 shrink-0" />
+                                ) : (
+                                  <Copy size={14} className="text-primary shrink-0" />
+                                )}
+                                <span>{isCopied ? "Copied to Clipboard!" : item.copyLabel}</span>
+                              </div>
+                              {isCopied && (
+                                <span className="text-[10px] text-emerald-500 font-semibold">Done</span>
+                              )}
+                            </button>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
             </motion.div>
           </div>
 
