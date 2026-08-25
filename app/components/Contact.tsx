@@ -18,8 +18,8 @@ export default function Contact() {
       icon: Mail,
       title: 'Email Me',
       value: 'anshg5384@gmail.com',
-      href: 'mailto:anshg5384@gmail.com',
-      action: 'Send Email',
+      href: 'https://mail.google.com/mail/?view=cm&fs=1&to=anshg5384@gmail.com',
+      action: 'Open in Gmail',
       isCopyable: true,
     },
     {
