@@ -184,7 +184,7 @@ const About = () => {
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-primary font-medium mb-1">
-                2023 - Present (Graduation 2026)
+                2023 - Present (Graduation 2027)
               </p>
               <p className="text-lg font-semibold text-foreground">
                 B.Tech in Artificial Intelligence & Data Science

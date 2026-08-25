@@ -67,7 +67,7 @@ export default function Chatbot() {
     email: 'anshg5384@gmail.com',
     phone: '+91 9079231064',
     location: 'Raichur, Karnataka, India',
-    summary: 'AI & Data Science undergraduate at IIIT Raichur (Graduating 2026) and Backend Intern at Infooware. Solved 400+ DSA problems. Builds Full-stack, AI/ML-powered applications and RESTful APIs using Node.js, Express, TypeScript, React.js, Python, PostgreSQL, and MongoDB.',
+    summary: 'AI & Data Science undergraduate at IIIT Raichur (Graduating 2027) and Backend Intern at Infooware. Solved 400+ DSA problems. Builds Full-stack, AI/ML-powered applications and RESTful APIs using Node.js, Express, TypeScript, React.js, Python, PostgreSQL, and MongoDB.',
     skills: {
       languages: ['Python', 'JavaScript', 'TypeScript', 'C/C++', 'SQL', 'HTML', 'CSS'],
       frameworks: ['React.js', 'Express.js', 'Node.js', 'Flask', 'Tailwind CSS', 'Socket.io', 'scikit-learn', 'Pandas'],
@@ -132,7 +132,7 @@ export default function Chatbot() {
         degree: 'B.Tech in Artificial Intelligence and Data Science',
         institution: 'Indian Institute of Information Technology, Raichur',
         location: 'Raichur, Karnataka',
-        period: 'August 2023 – Present (Graduating 2026)',
+        period: 'August 2023 – Present (Graduating 2027)',
       },
     ],
     achievements: [

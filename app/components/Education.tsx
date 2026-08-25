@@ -5,8 +5,8 @@ const education = [
   {
     degree: "B.Tech in Artificial Intelligence & Data Science",
     institution: "INDIAN INSTITUTE OF INFORMATION TECHNOLOGY RAICHUR",
-    period: "Aug 2023 – Present (Graduating 2026)",
-    description: "Specializing in AI/ML model deployment, full-stack web applications, database schema design, and algorithm optimization.",
+    period: "Aug 2023 – Present (Graduating 2027)",
+    description: "Specializing in Full-Stack Web Development and AI/ML systems, building end-to-end scalable applications, intelligent predictive models, and modern data-driven architectures.",
     icon: GraduationCap,
     gradient: "from-secondary to-pink-500",
   },

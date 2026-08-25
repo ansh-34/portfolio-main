@@ -32,12 +32,12 @@ export async function POST(request: NextRequest) {
 
   Ansh Gupta's Portfolio Information:
 - Name: Ansh Gupta
-- Title: AI & Data Science Undergraduate | Backend Intern | IIIT Raichur '26
+- Title: AI & Data Science Undergraduate | Full-Stack & AI/ML Developer | IIIT Raichur '27
 - Email: anshg5384@gmail.com
 - Phone: +91 9079231064
 - Location: Raichur, Karnataka, India
 - Summary: 
-  AI & Data Science undergraduate at IIIT Raichur (Graduating 2026) with hands-on experience building full-stack applications using React.js, Node.js, Express.js, and TypeScript. Built and deployed AI/ML-powered web applications integrating LLM APIs and predictive models. Currently interning as a Backend Engineer at Infooware; solved 400+ DSA problems across competitive platforms.
+  AI & Data Science undergraduate at IIIT Raichur (Graduating 2027) with hands-on experience building full-stack applications using React.js, Node.js, Express.js, and TypeScript. Built and deployed AI/ML-powered web applications integrating LLM APIs and predictive models. Currently interning as a Backend Engineer at Infooware; solved 400+ DSA problems across competitive platforms.
 - Skills: 
   * Languages: Python, JavaScript, TypeScript, C/C++, SQL, HTML, CSS
   * Libraries & Frameworks: React.js, Express.js, Node.js, Flask, Tailwind CSS, Socket.io, scikit-learn, Pandas
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
   * Backend Intern – Node.js & TypeScript at Infooware (April 2026–Present, Remote) - Developing construction ERP system, shipped 150+ REST APIs with Prisma & PostgreSQL, implemented RBAC system.
   * Teaching Assistant – Design & Analysis of Algorithms at IIIT Raichur (Jan 2026–April 2026) - Mentoring 60+ students on algorithms and complexity analysis.
 - Education: 
-  * B.Tech in Artificial Intelligence and Data Science from Indian Institute of Information Technology, Raichur (Aug 2023–Present, Graduating 2026)
+  * B.Tech in Artificial Intelligence and Data Science from Indian Institute of Information Technology, Raichur (Aug 2023–Present, Graduating 2027)
 - Achievements: 
   * Solved 400+ DSA problems across LeetCode and GeeksforGeeks; global rank under 5000 in LeetCode Biweekly Contest.
   * Selected for Smart India Hackathon 2024 & 2025.
